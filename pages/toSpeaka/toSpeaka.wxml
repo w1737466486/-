@@ -1,0 +1,2 @@
+<!--pages/toSpeaka/toSpeaka.wxml-->
+<web-view src="https://h5.speaka.live/front/html/lecture_notes.html"></web-view>

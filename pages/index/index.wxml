@@ -1,0 +1,176 @@
+<!--index.wxml-->
+<!-- <view class='recommended_word'>
+头部今日推荐单词
+  <view class="recommended_word_head {{showView?'show':'hide'}}">
+    <view class='recommended_word_text'><text>今日单词</text><icon type='search' size='24' color='black'  bindtap="change"></icon></view>
+  </view>
+  头部切换搜索框
+  <view class="recommended_word_search {{showView?'hide':'show'}}">
+    <view class='recommended_word_input'><input class="keyword" confirm-type="search"   placeholder="请输入中文或英文单词" bindconfirm="onSearch" value='{{val}}' bindinput='getval' /><icon type='search' size='24' color='black' bindtap='search_word'></icon></view>
+  </view>
+  <view class='recommended_word_main'>
+  闪卡显示区
+    <view class="recommended_word_box {{showWord?'show':'hide'}}">
+      <view class="recommended_word_img">
+              <view class="recommended_word_blur"> 
+              </view>
+              <image src='{{word_img}}'></image>
+      </view>
+      <text class='word_eng'>{{word_eng}}</text>
+      <text class='word_chn'>{{word_chn}}</text>
+      <view class='word_vioce'>
+       <image style="width: 66rpx; height: 66rpx" src="{{src_voice?voice_png:voice_gif}}" bindtap='play_voice'></image>
+       <audio src='{{src_audio}}'  id='wordAudio'></audio>
+      </view>
+    </view>
+默认单词显示区
+    <view class="recommended_word_word {{showWord?'hide':'show'}}">
+       <view class='recommended_word_eng'>{{recommended_word}}</view>
+       <view wx:for="{{arr_word}}" wx:key="{{index}}">{{item}}</view>
+
+    </view>
+  </view>
+  <view class="recommended_word_foot {{showVideo?'show':'hide'}}">
+    <view class='word_foot_del'><image src='../../img/word_video.png'></image>单词小视频</view>
+    <view class='word_foot_ul' >
+      <view class='word_foot_li'  wx:for="{{arr_video}}" wx:key="{{index}}">
+          <view class='word_foot_img'>
+          <image src='http://s.speaka.live/{{item.pic_path}}'></image>
+          </view>
+          <view class='word_foot_p'><image src='../../img/Like.png'></image>{{item.like_num}}</view>
+          <image wx:if="{{index==0}}" src='../../img/better.png'></image>
+      </view>
+    </view>
+  </view>
+</view> -->
+<view class='index' hidden='{{index}}'>
+   <view class='indexview'>
+     <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"><image src='../../img/getInfo.png'></image></button>
+   </view>
+</view>
+<view class="loading" hidden="{{loadingHidden}}">
+  <loading >
+          加载中...
+  </loading>
+</view>
+<view id='html'>
+  <view class='banner_wrapper'>
+      <image src="../../img/top1.png"></image>
+      <view class="viewVideo {{showVideo?'videoMax':'videoMin'}}" bindtap="playVideo">
+      <image src='../../img/Play.png'></image>
+      </view>
+      <view class="playVideo {{showBox?'show':'hide'}}">
+        <view class='close' bindtap='stopVideo' >
+         <image src='../../img/close.png'></image>
+        </view>
+        <video id='myVideo' controls="true" poster="https://s.speaka.live/thumb/20180818/Z9HbqIqySkOQsh9uuesZRgoucT3jk6P0OHTDqesx.png" controlslist="nodownload" src="https://s.speaka.live/static/h5.mp4"></video>
+      </view>
+  </view>
+  <view class="main">
+  <!-- 团购成员 -->
+    <view class='section' style="padding: 8px 0 0 0;background-color: #1e88e5;">
+      <view id="groupBuyDetail">
+       <view class="group-buy-list" id="groupBuyList">
+          <view class="group-member first-member">
+            <view class='b'>
+              <image src='{{number_one}}'></image>
+              <view class='em'>团长</view>
+            </view>
+          <text>{{name_one}}</text>
+          </view>
+          <view class="group-member second-member">
+            <view class='b'>
+              <image src='{{number_two}}'></image>
+              <view class='em'>成员A</view>
+            </view>
+          <text>{{name_two}}</text>
+          </view>
+          <view class="group-member third-member">
+            <view class='b'>
+              <image src='{{number_three}}'></image>
+              <view class='em'>成员B</view>
+            </view>
+          <text>{{name_three}}</text>
+          </view>
+       </view>
+      </view>
+      <view class="notice {{groupshow?'show':'hide'}}">
+        剩余成团时间：
+        <text class="hour">{{hour}}</text>时：<text class="min">{{min}}</text>分：<text class="sec">{{sec}}</text>秒
+      </view>
+      <view class="notice {{!groupshow?'show':'hide'}}">
+        {{group_status}}
+      </view>
+    </view>
+<!-- 活动进度 -->
+    <view class="section" style="padding:10px 0 55px 0;background-color: #1e88e5;">
+      <view class="header" style="margin-top: 0;width: 40.53vw;">
+       <image src='../../img/jd.png'></image>
+      </view>
+      <view class="camp-step">
+        <view class="item">
+          <view class="group-buy-step1 icon {{group_buy_step1?'active':'aaa'}}">
+          <image src='../../img/ic_group_buy_step1.png'></image>
+          </view>
+          <text>开团当团长</text>
+        </view>
+        <view class="item">
+          <view class="group-buy-step2 icon {{group_buy_step2?'active':'aaa'}}"><image src='../../img/ic_group_buy_step2.png'></image></view>
+          <text>参团支付</text>
+        </view>
+        <view class="item">
+          <view class="group-buy-step3 icon {{group_buy_step3?'active':'aaa'}}"><image src='../../img/ic_group_buy_step3.png'></image></view>
+          <text>邀请好友参团</text>
+        </view>
+        <view class="item">
+          <view class="group-buy-step4 icon {{group_buy_step4?'active':'aaa'}}"><image src='../../img/ic_group_buy_step4.png'></image></view>
+          <text>团购完成</text>
+        </view>
+        <view>
+          <view class="connect-line"></view>
+          <view class="connect-line"></view>
+          <view class="connect-line"></view>
+        </view>
+      </view>
+<!-- 课程介绍 -->
+      <view class="act_main">
+        <image src="../../img/body.png"></image>
+			  </view>
+			  <view class="act_txt">
+			  	<view class="act_txt_con">
+            <image src="../../img/need.png"></image>
+			  	</view>
+			  	<view class="bottom_wx">
+            <image src="../../img/bottom_wx.png" bindtap='toSpeaka' data-url='pages/toSpeaka/toSpeaka'></image>
+			  	</view>
+			  </view>
+    </view>
+  </view>
+  <!-- 购买 -->
+  <view class="fixed_btns">
+    <view class="buyAlone_btn" bindtap="alone_buy">{{alonebuy}}</view>
+    <view class="group_btn" data-field="1037" bindtap="group_buy">
+      {{groupbuy}}
+    </view>
+  </view>
+  <!-- 已购买 -->
+  <view class="purchased {{isbuy?'show':'hide'}}">
+    <button open-type='contact'  class='download' bindtap="download">联系客服</button>
+    <button open-type='share' class="invite"  bindtap="invite">{{invite}}</button>
+  </view>
+  <!-- 绑定手机 -->
+  <view class="login_mask {{showCode?'show':'hide'}}">
+    <view class="close_phone" bindtap='closeCode'><image src='../../img/close.png'></image>	</view>
+    <view class="login_box">
+      <view class='form'>
+        <view class="login_title">手机号绑定</view>
+        <input class="phone" maxlength='11' type='number'   placeholder="手机号"   value='{{phone}}' bindinput='getphone' />
+        <input class="phone_code" maxlength='6' type='number'  placeholder="验证码"  value='{{phone_code}}' bindinput='getcode' />
+        <view class="send_btn" bindtap='getcodeBtn' wx:if='{{get_code}}'>获取验证码</view>
+        <view class="send_btn" wx:if='{{!get_code}}'>{{codenum}}</view>
+        <view class="submit_btn" bindtap='submitBtn'>确定</view>
+      </view>
+    </view>
+  </view>
+  <view class="myToast" hidden="{{nullHouse}}">{{toastmsg}}</view>
+</view>

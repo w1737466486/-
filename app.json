@@ -1,0 +1,14 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/toSpeaka/toSpeaka",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#bbdefb",
+    "navigationBarTitleText": "Speaka 趣味英语课堂",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh":true
+  }
+}
